@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Monster Slayer</title>
+        <script src="https://npmcdn.com/vue/dist/vue.js"></script>
+        <link rel="stylesheet" href="css/foundation.min.css" />
+        <link rel="stylesheet" href="css/app.css" />
+    </head>
+    <body>
+        <div id="app">
+            <section class="row">
+                <div class="small-6 columns">
+                    <h1 class="text-center">YOU</h1>
+                    <div class="healthbar">
+                        <div
+                            class="healthbar text-center"
+                            style="background-color: green; margin: 0; color: white;"
+                            :style="{width: you + '%'}"
+                        >
+                            {{ you }}
+                        </div>
+                    </div>
+                </div>
+                <div class="small-6 columns">
+                    <h1 class="text-center">MONSTER</h1>
+                    <div class="healthbar">
+                        <div
+                            class="healthbar text-center"
+                            style="background-color: green; margin: 0; color: white;"
+                            :style="{width: monster + '%'}"
+                        >
+                            {{ monster }}
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section
+                class="row controls"
+                :style="{display: displayStartButton}"
+            >
+                <div class="small-12 columns">
+                    <button id="start-game" @click="showControls">
+                        START NEW GAME
+                    </button>
+                </div>
+            </section>
+            <section class="row controls" :style="{display: displayControls}">
+                <div class="small-12 columns">
+                    <button id="attack" @click="attack(), damage()">
+                        ATTACK
+                    </button>
+                    <button id="special-attack" @click="specialAttack">
+                        SPECIAL ATTACK
+                    </button>
+                    <button id="heal" @click="heal">HEAL</button>
+                    <button id="give-up" @click="giveup">GIVE UP</button>
+                </div>
+            </section>
+            <section class="row log" :style="{display: displayLog}">
+                <div class="small-12 columns">
+                    <ul>
+                        <li v-for="damage in logList" :class="damage.class">
+                            {{ damage.text }} {{ damage.health }} {{ damage.heal
+                            }}
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+        <script src="app.js"></script>
+    </body>
+</html>
