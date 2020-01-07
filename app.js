@@ -26,12 +26,12 @@ new Vue({
             youDamage = Math.floor(Math.random() * 10);
             monsterDamage = Math.floor(Math.random() * 10);
 
-            this.logList.push({
+            this.logList.unshift({
                 text: 'Monster hits player for',
                 health: youDamage,
                 class: 'monster-turn'
             });
-            this.logList.push({
+            this.logList.unshift({
                 text: 'Player hits player for',
                 health: monsterDamage,
                 class: 'player-turn'
@@ -47,12 +47,12 @@ new Vue({
             youDamage = Math.floor(Math.random() * 15);
             monsterDamage = Math.floor(Math.random() * 17);
 
-            this.logList.push({
+            this.logList.unshift({
                 text: 'Monster hits player for',
                 health: youDamage,
                 class: 'monster-turn'
             });
-            this.logList.push({
+            this.logList.unshift({
                 text: 'Player hits monster with Special Attack for',
                 health: monsterDamage,
                 class: 'player-turn'
@@ -70,12 +70,12 @@ new Vue({
                 this.you += youHeal;
             }
             this.you -= monsterDamage;
-            this.logList.push({
+            this.logList.unshift({
                 text: 'Monster hits player for',
                 health: monsterDamage,
                 class: 'monster-turn'
             });
-            this.logList.push({
+            this.logList.unshift({
                 text: 'Player heals for',
                 health: youHeal,
                 class: 'player-turn-heal'
