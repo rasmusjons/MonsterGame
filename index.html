@@ -8,64 +8,78 @@
     </head>
     <body>
         <div id="app">
-            <section class="row">
-                <div class="small-6 columns">
-                    <h1 class="text-center">YOU</h1>
-                    <div class="healthbar">
-                        <div
-                            class="healthbar text-center"
-                            style="background-color: green; margin: 0; color: white;"
-                            :style="{width: you + '%'}"
-                        >
-                            {{ you }}
+            <div v-if="you <= 0 || monster <= 0 ">
+                <h1 class="text-center">
+                    Score: You {{you}} vs Monster {{monster}}
+                </h1>
+                <button id="newRound" @click="giveup">PLAY AGAIN?</button>
+            </div>
+            <div v-else>
+                <section class="row">
+                    <div class="small-6 columns">
+                        <h1 class="text-center">YOU</h1>
+                        <div class="healthbar">
+                            <div
+                                class="healthbar text-center"
+                                style="background-color: green; margin: 0; color: white;"
+                                :style="{width: you + '%'}"
+                            >
+                                {{ you }}
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="small-6 columns">
-                    <h1 class="text-center">MONSTER</h1>
-                    <div class="healthbar">
-                        <div
-                            class="healthbar text-center"
-                            style="background-color: green; margin: 0; color: white;"
-                            :style="{width: monster + '%'}"
-                        >
-                            {{ monster }}
+                    <div class="small-6 columns">
+                        <h1 class="text-center">MONSTER</h1>
+                        <div class="healthbar">
+                            <div
+                                class="healthbar text-center"
+                                style="background-color: green; margin: 0; color: white;"
+                                :style="{width: monster + '%'}"
+                            >
+                                {{ monster }}
+                            </div>
                         </div>
                     </div>
-                </div>
-            </section>
-            <section
-                class="row controls"
-                :style="{display: displayStartButton}"
-            >
-                <div class="small-12 columns">
-                    <button id="start-game" @click="showControls">
-                        START NEW GAME
-                    </button>
-                </div>
-            </section>
-            <section class="row controls" :style="{display: displayControls}">
-                <div class="small-12 columns">
-                    <button id="attack" @click="attack(), damage()">
-                        ATTACK
-                    </button>
-                    <button id="special-attack" @click="specialAttack">
-                        SPECIAL ATTACK
-                    </button>
-                    <button id="heal" @click="heal">HEAL</button>
-                    <button id="give-up" @click="giveup">GIVE UP</button>
-                </div>
-            </section>
-            <section class="row log" :style="{display: displayLog}">
-                <div class="small-12 columns">
-                    <ul>
-                        <li v-for="damage in logList" :class="damage.class">
-                            {{ damage.text }} {{ damage.health }} {{ damage.heal
-                            }}
-                        </li>
-                    </ul>
-                </div>
-            </section>
+                </section>
+                <transition name="fade" appear key="start" mode="out-in">
+                    <section class="row controls" v-if="show">
+                        <div class="small-12 columns">
+                            <button id="start-game" @click="show = !show">
+                                START NEW GAME
+                            </button>
+                        </div>
+                    </section>
+
+                    <section class="row controls" v-if="!show" key="game">
+                        <div class="small-12 columns">
+                            <button id="attack" @click="attack(), damage()">
+                                ATTACK
+                            </button>
+                            <button id="special-attack" @click="specialAttack">
+                                SPECIAL ATTACK
+                            </button>
+                            <button id="heal" @click="heal">HEAL</button>
+                            <button id="give-up" @click="giveup">
+                                GIVE UP
+                            </button>
+                        </div>
+                    </section>
+                </transition>
+                <section class="row log" :style="{display: displayLog}">
+                    <div class="small-12 columns">
+                        <transition-group name="list" tag="ul">
+                            <li
+                                v-for="damage in logList"
+                                :key="damage.key"
+                                :class="damage.class"
+                            >
+                                {{ damage.text }} {{ damage.health }} {{
+                                damage.heal }}
+                            </li>
+                        </transition-group>
+                    </div>
+                </section>
+            </div>
         </div>
         <script src="app.js"></script>
     </body>

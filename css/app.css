@@ -7,7 +7,7 @@
     height: 40px;
     background-color: #eee;
     margin: auto;
-    transition: width 500ms;
+    transition: width 1000ms;
 }
 
 .controls,
@@ -59,6 +59,16 @@ button {
     margin: 10px;
 }
 
+#newRound {
+    background-color: #aaffb0;
+
+    font-size: 20px;
+    padding: 12px;
+    box-shadow: 0 1px 1px black;
+    display: block;
+    margin: 0 auto;
+}
+
 #start-game {
     background-color: #aaffb0;
 }
@@ -97,4 +107,39 @@ button {
 
 #give-up:hover {
     background-color: #c7c7c7;
+}
+
+.fade-enter {
+    opacity: 0;
+}
+
+.fade-enter-active {
+    transition: opacity 0.5s;
+}
+.fade-leave-to {
+    opacity: 0;
+}
+
+.fade-leave-active {
+    transition: opacity 0.5s;
+}
+
+.list-enter {
+    opacity: 0;
+    transform: translateX(30px);
+}
+
+.list-enter-active {
+    transition: all 1s;
+}
+.list-leave-to {
+    opacity: 0;
+}
+
+.list-leave-active {
+    transition: all 1s;
+}
+
+.list-move {
+    transition: transform 1s;
 }
