@@ -1,12 +1,13 @@
 new Vue({
     el: '#app',
     data: {
+        show: true,
         you: 100,
         monster: 100,
         displayControls: 'none',
         displayStartButton: 'block',
         displayLog: 'none',
-        logList: []
+        logList: [],
     },
     methods: {
         showControls: function() {
@@ -16,7 +17,6 @@ new Vue({
 
         attack: function() {
             this.displayLog = 'block';
-
             console.log('logList');
         },
 
@@ -29,12 +29,14 @@ new Vue({
             this.logList.unshift({
                 text: 'Monster hits player for',
                 health: youDamage,
-                class: 'monster-turn'
+                class: 'monster-turn',
+                key: Math.random(),
             });
             this.logList.unshift({
                 text: 'Player hits player for',
                 health: monsterDamage,
-                class: 'player-turn'
+                class: 'player-turn',
+                key: Math.random(),
             });
 
             this.you -= youDamage;
@@ -50,12 +52,14 @@ new Vue({
             this.logList.unshift({
                 text: 'Monster hits player for',
                 health: youDamage,
-                class: 'monster-turn'
+                class: 'monster-turn',
+                key: Math.random(),
             });
             this.logList.unshift({
                 text: 'Player hits monster with Special Attack for',
                 health: monsterDamage,
-                class: 'player-turn'
+                class: 'player-turn',
+                key: Math.random(),
             });
 
             this.you -= youDamage;
@@ -73,12 +77,14 @@ new Vue({
             this.logList.unshift({
                 text: 'Monster hits player for',
                 health: monsterDamage,
-                class: 'monster-turn'
+                class: 'monster-turn',
+                key: Math.random(),
             });
             this.logList.unshift({
                 text: 'Player heals for',
                 health: youHeal,
-                class: 'player-turn-heal'
+                class: 'player-turn-heal',
+                key: Math.random(),
             });
         },
 
@@ -89,6 +95,6 @@ new Vue({
             this.you = 100;
             this.monster = 100;
             this.logList = [];
-        }
-    }
+        },
+    },
 });
